@@ -1,0 +1,7 @@
+[
+  { "id": 1, "nama": "matcha latte", "harga": 15000 },
+  { "id": 2, "nama": "Jus alpukat", "harga": 10000 },
+  { "id": 3, "nama": "chocolatos matcha", "harga": 6000 },
+  { "id": 4, "nama": "coca cola", "harga": 5000 },
+  { "id": 5, "nama": "americano", "harga": 15000 }
+]

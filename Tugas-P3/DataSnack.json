@@ -1,0 +1,7 @@
+[
+  { "id": 1, "nama": "donat mambo", "harga": 12000 },
+  { "id": 2, "nama": "mochi coklat", "harga": 8000 },
+  { "id": 3, "nama": "piscok", "harga": 5000 },
+  { "id": 4, "nama": "risol mayo", "harga": 10000 },
+  { "id": 5, "nama": "dimsum keju", "harga": 30000 }
+]
