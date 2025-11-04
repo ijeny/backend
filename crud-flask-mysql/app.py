@@ -2,13 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.secret_key = 'secret123'
 
 #konfigurasi ke mysql
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Scendy@1904'
-app.config['MYSQL_DB'] = 'crud_db'
+app.config['MYSQL_PASSWORD'] = 'ijeny46'
+app.config['MYSQL_DB'] = 'crud_upload_db'
 
 mysql = MySQL(app)
 
@@ -69,4 +68,5 @@ def delete(id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
+
     app.run(debug=True)
