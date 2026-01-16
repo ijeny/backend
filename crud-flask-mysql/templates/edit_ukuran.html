@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Ukuran</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <h3>Edit Ukuran</h3>
+
+        <form method="POST" class="row g-2 mb-3">
+            <div class="col-md-4">
+                <input type="text" name="nama_ukuran" value="{{ data[1] }}" class="form-control" required>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary">Simpan</button>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url_for('ukuran') }}" class="btn btn-secondary">
+                    Batal
+                </a>
+            </div>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, msg in messages %}
+        <div class="alert alert-{{ 'danger' if category=='error' else category }}">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </div>
+
+</body>
+
+</html>

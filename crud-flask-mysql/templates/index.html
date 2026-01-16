@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask CRUD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">Daftar Produk Toko Baju</h1>
+        <div class="container d-flex justify-content-between align-items-center pt-3 pb-3">
+            <a href="{{ url_for('index') }}" class="panah text-decoration-none">
+                ←
+            </a>
+            <span class="namaKategori navbar-brand fw-bold text-capitalize">
+                {{ kategori }}
+            </span>
+            <span></span>
+        </div>
+        <a href="{{ url_for('add') }}" class="btn btn-primary mb-3">Tambah Barang</a>
+        <a href="{{ url_for('ukuran') }}" class="btn btn-primary mb-3 ml-2">
+            Kelola Ukuran
+        </a>
+
+        <form method="GET" action="/" class="row g-2 mb-3">
+            <div class="col-md-6">
+                <input type="text" name="q" class="form-control" placeholder="Cari kode / nama" value="{{ keyword }}">
+            </div>
+
+            <div class="col-md-4">
+                <select name="size" class="form-select">
+                    <option value="">Semua Ukuran</option>
+                    {% for s in sizes %}
+                    <option value="{{ s }}" {% if size==s %}selected{% endif %}>
+                        {{ s }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">Filter</button>
+            </div>
+        </form>
+
+        <table class="table table-bordered align-middle">
+            <thead class="thead-light">
+                <tr>
+                    <th>Kode</th>
+                    <th>Nama</th>
+                    <th>Ukuran</th>
+                    <th>Warna</th>
+                    <th>Stok</th>
+                    <th>Harga</th>
+                    <th>Foto</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for brg in dtstok %}
+                <tr>
+                    <td>{{ brg[0] }}</td>
+                    <td>{{ brg[1] }}</td>
+                    <td>{{ brg[2] }}</td>
+                    <td>{{ brg[3] }}</td>
+                    <td>{{ brg[4] }}</td>
+                    <td>Rp {{ brg[5] }}</td>
+                    <td>
+                        {% if brg[6] %}
+                        <img src="{{ url_for('static', filename='img/' + brg[6]) }}" width="100" class="img-thumbnail">
+                        {% else %}
+                        <span class="text-muted">Tidak ada foto</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('edit', kode_baju=brg[0]) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ url_for('delete', kode_baju=brg[0]) }}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Hapus data?')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page-1 }}&q={{ keyword }}">Previous</a>
+                </li>
+                {% endif %}
+
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="?page={{ p }}&q={{ keyword }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %} <li class="page-item">
+                    <a class="page-link" href="?page={{ page+1 }}&q={{ keyword }}">Next</a>
+                    </li>
+                    {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manajemen Ukuran</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <h3>Manajemen Ukuran</h3>
+
+        <form method="POST" class="row g-2 mb-3">
+            <div class="col-md-4">
+                <input type="text" name="nama_ukuran" class="form-control" placeholder="Contoh: XXL" required>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary">Tambah</button>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    ← Kembali
+                </a>
+            </div>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, msg in messages %}
+        <div class="alert alert-{{ 'danger' if category=='error' else category }}">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Ukuran</th>
+                <th>Aksi</th>
+            </tr>
+            {% for s in sizes %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>
+                    <a href="{{ url_for('edit_ukuran', id=s[0]) }}" class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a href="{{ url_for('delete_ukuran', id=s[0]) }}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Hapus ukuran ini?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+
+</html>
